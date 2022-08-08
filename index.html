@@ -1,9 +1,690 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Example</title>
-    </head>
-    <body>
-        <p>Hello World</p>
-    </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title> </title>
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,500,600" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.3.0/d3.min.js" integrity="sha512-NMhzM2RHzbCRO0s5VPaRC+2bW6nmNXimzC9p5sp2x19M+zzuSJ2T50dEQ7hpHkNjnX1mt8nQg1NNthwRZgsoIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" integrity="sha512-dLxUelApnYxpLt6K2iomGngnHO83iUvZytA3YjDUCjT0HDOHKXnVYdf3hU4JjM8uEhxf9nD1/ey98U3t2vZ0qQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <style type="text/css">
+    /* http://prismjs.com/download.html?themes=prism&languages=markup+css+clike+javascript&plugins=line-highlight+line-numbers+toolbar+show-language */
+/**
+ * prism.js default theme for JavaScript, CSS and HTML
+ * Based on dabblet (http://dabblet.com)
+ * @author Lea Verou
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: black;
+  background: none;
+  text-shadow: 0 1px white;
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.8;
+
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
+  text-shadow: none;
+  background: #b3d4fc;
+}
+
+pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
+code[class*="language-"]::selection, code[class*="language-"] ::selection {
+  text-shadow: none;
+  background: #b3d4fc;
+}
+
+@media print {
+  code[class*="language-"],
+  pre[class*="language-"] {
+    text-shadow: none;
+  }
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: 1em;
+  margin: .5em 0;
+  overflow: auto;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+  background: #f5f2f0;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: slategray;
+}
+
+.token.punctuation {
+  color: #999;
+}
+
+.namespace {
+  opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  color: #905;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+  color: #690;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+  color: #a67f59;
+  background: hsla(0, 0%, 100%, .5);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+  color: #07a;
+}
+
+.token.function {
+  color: #DD4A68;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+  color: #e90;
+}
+
+.token.important,
+.token.bold {
+  font-weight: bold;
+}
+.token.italic {
+  font-style: italic;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+pre[data-line] {
+  position: relative;
+  padding: 1em 0 1em 3em;
+}
+
+.line-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: inherit 0;
+  margin-top: 1em; /* Same as .prism’s padding-top */
+
+  background: hsla(24, 20%, 50%,.08);
+  background: linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
+
+  pointer-events: none;
+
+  line-height: inherit;
+  white-space: pre;
+}
+
+  .line-highlight:before,
+  .line-highlight[data-end]:after {
+    content: attr(data-start);
+    position: absolute;
+    top: .6em;
+    left: .4em;
+    min-width: 1em;
+    padding: 0 .5em;
+    background-color: hsla(24, 20%, 50%,.4);
+    color: hsl(24, 20%, 95%);
+    font: bold 65%/1.5 sans-serif;
+    text-align: center;
+    vertical-align: .3em;
+    border-radius: 999px;
+    text-shadow: none;
+    box-shadow: 0 1px white;
+  }
+
+  .line-highlight[data-end]:after {
+    content: attr(data-end);
+    top: auto;
+    bottom: .4em;
+  }
+
+pre.line-numbers {
+  position: relative;
+  padding-left: 3.8em;
+  counter-reset: linenumber;
+}
+
+pre.line-numbers > code {
+  position: relative;
+  display: block;
+}
+
+.line-numbers .line-numbers-rows {
+  position: absolute;
+  pointer-events: none;
+  top: 0;
+  font-size: 100%;
+  left: -3.0em;
+  width: 3em; /* works for line-numbers below 1000 lines */
+  letter-spacing: -1px;
+  border-right: 1px solid #999;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+}
+
+  .line-numbers-rows > span {
+    pointer-events: none;
+    display: block;
+    counter-increment: linenumber;
+  }
+
+    .line-numbers-rows > span:before {
+      content: counter(linenumber);
+      color: #999;
+      display: block;
+      padding-right: 0.8em;
+      text-align: right;
+    }
+pre.code-toolbar {
+  position: relative;
+}
+
+pre.code-toolbar > .toolbar {
+  position: absolute;
+  top: .3em;
+  right: .2em;
+  transition: opacity 0.3s ease-in-out;
+  opacity: 0;
+}
+
+pre.code-toolbar:hover > .toolbar {
+  opacity: 1;
+}
+
+pre.code-toolbar > .toolbar .toolbar-item {
+  display: inline-block;
+}
+
+pre.code-toolbar > .toolbar a {
+  cursor: pointer;
+}
+
+pre.code-toolbar > .toolbar button {
+  background: none;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  line-height: normal;
+  overflow: visible;
+  padding: 0;
+  -webkit-user-select: none; /* for button */
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+pre.code-toolbar > .toolbar a,
+pre.code-toolbar > .toolbar button,
+pre.code-toolbar > .toolbar span {
+  color: #bbb;
+  font-size: .8em;
+  padding: 0 .5em;
+  background: #f5f2f0;
+  background: rgba(224, 224, 224, 0.2);
+  box-shadow: 0 2px 0 0 rgba(0,0,0,0.2);
+  border-radius: .5em;
+}
+
+pre.code-toolbar > .toolbar a:hover,
+pre.code-toolbar > .toolbar a:focus,
+pre.code-toolbar > .toolbar button:hover,
+pre.code-toolbar > .toolbar button:focus,
+pre.code-toolbar > .toolbar span:hover,
+pre.code-toolbar > .toolbar span:focus {
+  color: inherit;
+  text-decoration: none;
+}
+
+@keyframes hover-color {
+  from {
+    border-color: #c0c0c0; }
+  to {
+    border-color: #3e97eb; } }
+
+.magic-radio,
+.magic-checkbox {
+  position: absolute;
+  display: none; }
+
+.magic-radio[disabled],
+.magic-checkbox[disabled] {
+  cursor: not-allowed; }
+
+.magic-radio + label,
+.magic-checkbox + label {
+  position: relative;
+  display: block;
+  padding-left: 30px;
+  cursor: pointer;
+  vertical-align: middle; }
+  .magic-radio + label:hover:before,
+  .magic-checkbox + label:hover:before {
+    animation-duration: 0.4s;
+    animation-fill-mode: both;
+    animation-name: hover-color; }
+  .magic-radio + label:before,
+  .magic-checkbox + label:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    content: '';
+    border: 1px solid #c0c0c0; }
+  .magic-radio + label:after,
+  .magic-checkbox + label:after {
+    position: absolute;
+    display: none;
+    content: ''; }
+
+.magic-radio[disabled] + label,
+.magic-checkbox[disabled] + label {
+  cursor: not-allowed;
+  color: #e4e4e4; }
+  .magic-radio[disabled] + label:hover, .magic-radio[disabled] + label:before, .magic-radio[disabled] + label:after,
+  .magic-checkbox[disabled] + label:hover,
+  .magic-checkbox[disabled] + label:before,
+  .magic-checkbox[disabled] + label:after {
+    cursor: not-allowed; }
+  .magic-radio[disabled] + label:hover:before,
+  .magic-checkbox[disabled] + label:hover:before {
+    border: 1px solid #e4e4e4;
+    animation-name: none; }
+  .magic-radio[disabled] + label:before,
+  .magic-checkbox[disabled] + label:before {
+    border-color: #e4e4e4; }
+
+.magic-radio:checked + label:before,
+.magic-checkbox:checked + label:before {
+  animation-name: none; }
+
+.magic-radio:checked + label:after,
+.magic-checkbox:checked + label:after {
+  display: block; }
+
+.magic-radio + label:before {
+  border-radius: 50%; }
+
+.magic-radio + label:after {
+  top: 6px;
+  left: 6px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #3e97eb; }
+
+.magic-radio:checked + label:before {
+  border: 1px solid #3e97eb; }
+
+.magic-radio:checked[disabled] + label:before {
+  border: 1px solid #c9e2f9; }
+
+.magic-radio:checked[disabled] + label:after {
+  background: #c9e2f9; }
+
+.magic-checkbox + label:before {
+  border-radius: 3px; }
+
+.magic-checkbox + label:after {
+  top: 2px;
+  left: 7px;
+  box-sizing: border-box;
+  width: 6px;
+  height: 12px;
+  transform: rotate(45deg);
+  border-width: 2px;
+  border-style: solid;
+  border-color: #fff;
+  border-top: 0;
+  border-left: 0; }
+
+.magic-checkbox:checked + label:before {
+  border: #3e97eb;
+  background: #3e97eb; }
+
+.magic-checkbox:checked[disabled] + label:before {
+  border: #c9e2f9;
+  background: #c9e2f9; }
+
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 14px;
+  line-height: 24px;
+  color: #444;
+}
+
+.fab {
+  font-family: "Font Awesome 5 Brands";
+  -webkit-font-smoothing: antialiased;
+  color: #afafaf;
+  font-size: 24px;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.error-page {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.error-stack {
+  background: #edecea;
+  padding: 100px 80px;
+  box-sizing: border-box;
+}
+
+.error-status {
+  color: #afafaf;
+  font-size: 150px;
+  position: absolute;
+  opacity: 0.2;
+  right: 80px;
+  top: 80px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.error-name {
+  color: #db5461;
+  font-size: 18px;
+  font-family: Menlo, SFMono-Regular, Monaco, "Fira Code", "Fira Mono", Consolas, "Liberation Mono", "Courier New", monospace;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.error-message {
+  font-weight: 300;
+  font-size: 40px;
+  line-height: 48px;
+}
+
+.error-title {
+  border-bottom: 1px solid #d0cfcf;
+  padding-bottom: 15px;
+  margin-bottom: 20px;
+}
+
+.error-links {
+  margin-top: 20px;
+}
+
+.error-links a {
+  margin-right: 8px;
+}
+
+.error-frames {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.frame-preview {
+  background: #fff;
+  width: 50%;
+  box-shadow: 0px 0px 9px #d3d3d3;
+  height: 100%;
+  box-sizing: border-box;
+  overflow: auto;
+}
+
+.frame-stack {
+  margin-right: 40px;
+  flex: 1;
+  padding: 10px 0;
+  box-sizing: border-box;
+}
+
+.frames-list {
+  overflow: auto;
+  max-height: 334px;
+}
+
+.frames-filter-selector {
+  margin-bottom: 30px;
+  margin-left: 8px;
+}
+
+.request-details {
+  padding: 50px 80px;
+}
+
+.request-title {
+  text-transform: uppercase;
+  font-size: 18px;
+  letter-spacing: 1px;
+  padding: 0 5px 5px 5px;
+  margin-bottom: 15px;
+}
+
+.request-details table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 80px;
+}
+
+.request-details table td {
+  padding: 6px 5px;
+  font-size: 14px;
+  letter-spacing: 0.4px;
+  color: #455275;
+  border-bottom: 1px solid #e8e8e8;
+  word-break: break-word;
+}
+
+.request-details table td.title {
+  color: #999;
+  width: 40%;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+code[class*="language-"], pre[class*="language-"] {
+  background: transparent;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.line-numbers .line-numbers-rows {
+  border: none;
+}
+
+.frame-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 34px 6px 10px;
+  position: relative;
+  cursor: pointer;
+  transition: background 300ms ease;
+}
+
+.frame-row.native-frame {
+  display: none;
+  opacity: 0.4;
+}
+
+.frame-row.native-frame.force-show {
+  display: flex;
+}
+
+.frame-row:after {
+  content: "";
+  background: #db5461;
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  height: 10px;
+  width: 10px;
+  border-radius: 24px;
+}
+
+.frame-row:hover, .frame-row.active {
+  background: #fff;
+}
+
+.frame-row.active {
+  opacity: 1;
+}
+
+.frame-row-filepath {
+  color: #455275;
+  font-weight: 600;
+  margin-right: 15px;
+}
+
+.frame-context {
+  display: none;
+}
+
+.frame-row-code {
+  color: #999;
+}
+
+#frame-file {
+  color: #455275;
+  font-weight: 600;
+  border-bottom: 1px solid #e8e8e8;
+  padding: 10px 22px;
+}
+
+#frame-method {
+  color: #999;
+  font-weight: 400;
+  border-top: 1px solid #e8e8e8;
+  padding: 10px 22px;
+}
+
+.is-hidden {
+  display: none;
+}
+
+@media only screen and (max-width: 970px) {
+  .error-frames {
+    flex-direction: column-reverse;
+  }
+
+  .frame-preview {
+    width: 100%;
+  }
+
+  .frame-stack {
+    width: 100%;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <section class="error-page">
+    <section class="request-details">
+      <h2 class="request-title"> Request Details </h2>
+      <table>
+        <tr><td class="title"> URI </td><td> {{.Host}}{{.Path}} </td></tr>
+        <tr><td class="title"> Request Method </td><td> {{.Method}} </td></tr>
+        <tr><td class="title"> Protocol </td><td> {{.Proto}} </td></tr>
+        {{ if ne .Size 0 }}
+          <tr><td class="title"> Size </td><td> {{.Size}} bytes</td></tr>
+        {{ end }}
+      </table>
+
+      <h2 class="request-title"> TLS Details </h2>
+      <table>
+        <tr><td class="title"> Version </td><td> {{ .TLS.Version }} </td></tr>
+        <tr><td class="title"> Cipher </td><td> {{ .TLS.Cipher }} </td></tr>
+        <tr><td class="title"> SNI </td><td> {{ .TLS.Server }} </td></tr>
+      </table>
+
+      <h2 class="request-title"> Cloudflare Headers </h2>
+      <table>
+          {{ range $key, $value := .GetCFHeaders }}
+          <tr><td class="title"> {{ $key }} </td><td> {{ $value }} </td></tr>
+          {{ end }}
+      </table>
+
+      <h2 class="request-title"> Other Headers </h2>
+      <table>
+          {{ range $key, $value := .GetOtherHeaders }}
+          <tr><td class="title"> {{ $key }} </td><td> {{ $value }} </td></tr>
+          {{ end }}
+      </table>
+
+      <h2 class="request-title"> Cookies </h2>
+      <table>
+        {{ range $key, $value := .GetCookies }}
+        <tr><td class="title"> {{ $key }} </td><td> {{ $value }} </td></tr>
+        {{ end }}
+      </table>
+      <h2 class="request-title"> JSON Output </h2>
+      <pre><code> {{ .GetJSON }}</code></pre>
+    </section>
+  </section>
+</body>
 </html>
