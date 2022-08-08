@@ -10,10 +10,9 @@ export async function onRequest(context) {
     } = context;
 
     let headers =  {}
-    for (const pair of request.headers.entries()) {
-        headers[pair[0]] = pair[1]
-     }
-    return headers
+    for (const key of request.headers.keys()) {
+        headers[key] = request.headers.get(key)
+    }
   
     let obj =   {
         "src": request.headers.get('CF-Connecting-IP'),
