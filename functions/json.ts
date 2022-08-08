@@ -1,3 +1,11 @@
+async function get_headers(h) {
+    let headers =  {}
+    for (const pair of h.entries()) {
+        headers[pair[0]] = pair[1]
+     }
+    return headers
+}
+
 export async function onRequest(context) {
     // Contents of context object
     const {
@@ -21,7 +29,7 @@ export async function onRequest(context) {
           "cipher": request.cf.tlsCipher,
           "mtls": request.cf.tlsClientAuth
         },
-        "headers": request.headers
+        "headers": get_headers(request.headers)
       }
     return new Response(JSON.stringify(obj, null, 2));
   }
