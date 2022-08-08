@@ -13,13 +13,15 @@ export async function onRequest(context) {
     for (const key of request.headers.keys()) {
         headers[key] = request.headers.get(key)
     }
-  
+
+    const url = new URL(request.url);
+    
     let obj =   {
         "src": request.headers.get('CF-Connecting-IP'),
         "host": request.headers.get('Host'),
         "method": request.method,
         "protocol": request.cf.httpProtocol,
-        "path": request.url,
+        "path": url.pathname,
         "size": 0,
         "tls": {
           "version": request.cf.tlsVersion,
