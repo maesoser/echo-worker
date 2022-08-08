@@ -1,11 +1,3 @@
-async function get_headers(h) {
-    let headers =  {}
-    for (const pair of h.entries()) {
-        headers[pair[0]] = pair[1]
-     }
-    return headers
-}
-
 export async function onRequest(context) {
     // Contents of context object
     const {
@@ -16,6 +8,12 @@ export async function onRequest(context) {
       next, // used for middleware or to fetch assets
       data, // arbitrary space for passing data between middlewares
     } = context;
+
+    let headers =  {}
+    for (const pair of request.headers.entries()) {
+        headers[pair[0]] = pair[1]
+     }
+    return headers
   
     let obj =   {
         "src": request.headers.get('CF-Connecting-IP'),
@@ -27,9 +25,8 @@ export async function onRequest(context) {
         "tls": {
           "version": request.cf.tlsVersion,
           "cipher": request.cf.tlsCipher,
-          "mtls": request.cf.tlsClientAuth
         },
-        "headers": get_headers(request.headers)
+        "headers": headers
       }
     return new Response(JSON.stringify(obj, null, 2));
   }
